@@ -6,21 +6,27 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routes';
 import { FormsModule } from '@angular/forms';
 import { ClienteListComponent } from './components/cliente-list/cliente-list.component';
+import { ClienteService } from './services/cliente.service';
+import { CommonModule, NgFor } from '@angular/common';
 
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ClienteListComponent,
+    BrowserModule,
+    CommonModule
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    ClienteListComponent,
-    FormsModule
+    FormsModule,
+    CommonModule,
+    NgFor
   ],
-  providers: [],
+  providers: [ClienteService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

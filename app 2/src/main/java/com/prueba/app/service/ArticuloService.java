@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.databind.RuntimeJsonMappingException;
 import com.prueba.app.model.Articulo;
 import com.prueba.app.repository.ArticuloRepository;
 
@@ -33,4 +34,40 @@ public class ArticuloService {
     public void deleteById(Long id) {
         articuloRepository.deleteById(id);
     }
+
+    public void actualizarStock(Long id, int cantidadVendida) {
+        Articulo articulo = articuloRepository.findById(id).orElseThrow(() -> new RuntimeJsonMappingException("Articulo no encontrado"));
+        int stockActual = articulo.getStock();
+        if (stockActual < cantidadVendida) {
+            throw new RuntimeJsonMappingException("no existe stock");
+        } else {
+            articulo.setStock(stockActual - cantidadVendida);
+            articuloRepository.save(articulo);
+        }
+    }
+
+    public boolean verificarStock(Long id, int cantidadDeseada) {
+        Articulo articulo = articuloRepository.findById(id).orElseThrow(() -> new RuntimeJsonMappingException("Articulo no encontrado"));
+        int stockActual = articulo.getStock();
+        return stockActual >= cantidadDeseada;
+    }
+
+    public void agregarStock(Long id, int cantidadAgregar) {
+        Articulo articulo = articuloRepository.findById(id).orElseThrow(() -> new RuntimeJsonMappingException("Articulo no encontrado"));
+        int stockActual = articulo.getStock();
+        if ((stockActual + cantidadAgregar) > 5) {
+            throw new RuntimeJsonMappingException("no se puede agregar mas articulos");
+        } else {
+            articulo.setStock(stockActual + cantidadAgregar);
+            articuloRepository.save(articulo);
+        }
+    }
+
+    public void reducirStock(Long id, int cantidadAgregar) {
+        Articulo articulo = articuloRepository.findById(id).orElseThrow(() -> new RuntimeJsonMappingException("Articulo no encontrado"));
+        int stockActual = articulo.getStock();
+        articulo.setStock(stockActual - cantidadAgregar);
+        articuloRepository.save(articulo);
+    }
+
 }

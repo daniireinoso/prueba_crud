@@ -49,6 +49,7 @@ public class ArticuloController {
         articulo.setCodigo(articuloDetails.getCodigo());
         articulo.setNombre(articuloDetails.getNombre());
         articulo.setPrecioUnitario(articuloDetails.getPrecioUnitario());
+        articulo.setStock(articuloDetails.getStock());
         return articuloService.save(articulo);
     }
 

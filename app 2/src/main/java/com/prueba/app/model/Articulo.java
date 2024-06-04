@@ -17,6 +17,7 @@ public class Articulo {
     private String codigo;
     private String nombre;
     private double precioUnitario;
+    private int stock;
 
     @ManyToOne
     @JoinColumn(name = "orden_id")
@@ -35,8 +36,8 @@ public class Articulo {
         return codigo;
     }
 
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
+    public void setCodigo(String i) {
+        this.codigo = i;
     }
 
     public String getNombre() {
@@ -53,5 +54,13 @@ public class Articulo {
 
     public void setPrecioUnitario(Double precioUnitario) {
         this.precioUnitario = precioUnitario;
+    }
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
     }
 }

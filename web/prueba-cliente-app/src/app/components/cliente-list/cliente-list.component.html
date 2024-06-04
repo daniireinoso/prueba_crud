@@ -1,13 +1,14 @@
 <div>
   <h2>Lista de Clientes</h2>
+  <div>{{clientes[0]?.nombre}}</div>
   <ul>
     <li *ngFor="let cliente of clientes">
-      {{ cliente.nombre }} {{ cliente.apellido }}
+      {{ cliente?.nombre }} {{ cliente?.apellido }}
     </li>
   </ul>
 </div>
 
-<div *ngIf="clienteSeleccionado">
+<!-- <div *ngIf="clienteSeleccionado">
   <h2>Detalles del Cliente</h2>
   <label>Nombre:</label>
   <input type="text" [(ngModel)]="clienteSeleccionado?.nombre" />
@@ -24,4 +25,4 @@
   <label>Apellido:</label>
   <input type="text" [(ngModel)]="nuevoCliente.apellido" />
   <button (click)="createCliente(nuevoCliente)">Crear</button>
-</div>
+</div> -->
